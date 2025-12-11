@@ -1,0 +1,301 @@
+# from langflow.field_typing import Data
+from langflow.custom.custom_component.component import Component
+from langflow.io import MessageTextInput, Output, SliderInput
+from langflow.schema.data import Data
+from langflow.field_typing.range_spec import RangeSpec
+
+import spacy
+from transformers import AutoModelForSequenceClassification, pipeline, XLMRobertaTokenizer
+from sentence_transformers import SentenceTransformer, util
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.svm import LinearSVC
+import numpy as np
+import pandas as pd
+
+
+
+class CustomComponent(Component):
+    display_name = "RAG Validator"
+    description = "Custom Component to validate RAG outputs."
+    icon = "code"
+    name = "RAG_Analysis"
+
+    inputs = [
+        MessageTextInput(
+            name="user_input_value",
+            display_name="User Input Value",
+            info="This is a custom component Input",
+            value="Connect to Chat Input",
+            tool_mode=True,
+        ),
+        HandleInput(
+            name="retrieved_value",
+            display_name="Retrieval - Dataframe Input",
+            input_types=["DataFrame"],
+            info="Accept Data or DataFrame as input",
+            required=True,
+        ),
+        MessageTextInput(
+            name="llm_output_value",
+            display_name="LLM Output Value",
+            info="This is a custom component Input",
+            value="Connect to LLM Output",
+            tool_mode=True,
+        ),
+    ]
+    
+    outputs = [
+        Output(display_name="Output", name="output", method="build_output"),
+    ]
+
+    #============================
+    # Chat Input
+    #============================
+    def analyze_chat_input(self, u_val, entities, classifier, confidence_threshold: float = 0.6):
+        intent_labels = ["comparison", "bridge"]
+        #NER
+        ner_score = 1 if len(entities) > 0 else 0
+        classify = classifier(u_val, intent_labels)
+        intent = classify["labels"][0]
+        #Confidence
+        confidence_score = classify["scores"][0]
+        #Intent
+        if confidence_score >= confidence_threshold:
+            intent_score = (confidence_score - confidence_threshold) / (1 - confidence_threshold)
+        else:
+            intent_score = 0
+        return {
+            "ner_score":float(ner_score),
+            "intent_score":float(intent_score),
+            "intent_confidence_sore":float(confidence_score)
+        }
+        
+        
+    #============================
+    #Retrieval
+    #============================
+    def filter_gt(self, user_query, gt_texts, sim_thresh, query_emb, gt_emb):
+        if not gt_texts:
+            return []
+        sim_scores = util.cos_sim(query_emb, gt_emb).squeeze(0)
+        filtered_gt_indices = [i for i, score in enumerate(sim_scores) if score >= sim_thresh]
+        filtered_gt = [gt_texts[i] for i in filtered_gt_indices]
+        return filtered_gt, filtered_gt_indices, sim_scores
+        
+    def analyze_retrieval(self, embedding_model, ground_truth_docs, user_query, retrieved_docs, k, sim_thresh):
+        retrieval_metrics = {}
+        if ground_truth_docs is None or "text" not in ground_truth_docs.columns:
+            raise ValueError("gt_df fehlt oder keine 'text' Spalte")
+        if retrieved_docs is None or "text" not in retrieved_docs.columns:
+            raise ValueError("ret_docs fehlt oder keine 'text' Spalte")
+        
+        #Embedding User Query
+        query_emb = embedding_model.encode(user_query, convert_to_tensor=True)
+        
+        #Ground Truth
+        gt_texts = ground_truth_docs["text"].tolist()
+        #Embedding Ground Truth
+        gt_emb = embedding_model.encode(gt_texts, convert_to_tensor=True)
+        #Filtered Ground Truth
+        filtered_gt, filtered_gt_indices, sim_score_print = self.filter_gt(user_query, gt_texts, sim_thresh, query_emb, gt_emb)
+        #Retrieval-Texte
+        retrieved_texts = retrieved_docs["text"].tolist()[:k]
+        if not retrieved_texts:
+            retrieval_metrics["recall_at_k_score"] = 0.0
+            retrieval_metrics["precision_at_k_score"] = 0.0
+            retrieval_metrics["mrr_score"] = 0.0
+            retrieval_metrics["ndcg_score"] = 0.0
+            retrieval_metrics["note"] = "retrieved_docs leer"
+            return retrieval_metrics
+        #Embedding Retrieval Texte
+        ret_emb = embedding_model.encode(retrieved_texts, convert_to_tensor=True)
+        
+        #Cosine Similarity
+        sim_matrix = util.cos_sim(ret_emb, gt_emb)
+        
+        #Ground Truth Matching
+        hits_per_gt = [False] * len(filtered_gt_indices)
+        hits_count = 0
+        for i in range(min(k, len(retrieved_texts))):
+            sims = sim_matrix[i]
+            #matched_gt = [j for j,s in enumerate(sims) if s >= sim_thresh]
+            for local_idx, global_idx in enumerate(filtered_gt_indices):
+                s = sims[global_idx]
+                if s >= sim_thresh and not hits_per_gt[local_idx]:
+                    hits_per_gt[local_idx] = True
+                    hits_count += 1
+        
+        recall_at_k = hits_count / len(filtered_gt) if filtered_gt else 0
+        retrieval_metrics["recall_at_k_score"] = float(recall_at_k)
+        #Precision@k
+        #Top-3 Similarities zwischen k Retrieval und Ground-Truth
+        top_k = min(k, len(retrieved_texts))
+        score = 0.0
+        for i in range(top_k):
+            sims = sim_matrix[i]
+            rel = np.mean(sorted(sims, reverse=True)[:3])
+            score += rel
+        precision_at_k = score / top_k if top_k > 0 else 0.0
+        retrieval_metrics["precision_at_k_score"] = float(precision_at_k)
+        #MRR
+        weighted_ranks = []
+        for idx, doc in enumerate(retrieved_texts[:k]):
+            sims = sorted(sim_matrix[idx], reverse=True)[:3]
+            rel = np.mean(sims)
+            if rel > 0:
+                weighted_ranks.append(rel / (idx + 1))
+        total_rel = np.sum([
+            np.mean(sorted(sim_matrix[idx], reverse=True)[:3])
+            for idx in range(min(k, len(retrieved_texts)))
+        ])
+        if total_rel > 0 and len(weighted_ranks) > 0:
+            mrr_score = np.sum(weighted_ranks) / total_rel
+        else:
+            mrr_score = 0.0
+        retrieval_metrics["mrr_score"] = float(mrr_score)
+        #NDCG
+        relevance_scores = [float(sim_matrix[i].max().item()) for i in range(len(retrieved_texts))]
+        #DCG
+        dcg = sum((2**r - 1) / np.log2(idx + 2) for idx, r in enumerate(relevance_scores))
+        #IDCG
+        ideal_scores = sorted(relevance_scores, reverse=True)
+        idcg = sum((2**r - 1) / np.log2(idx + 2) for idx, r in enumerate(ideal_scores))
+        ndcg_score = dcg / idcg if idcg > 0 else 0.0
+        retrieval_metrics["ndcg_score"] = float(ndcg_score)
+        return retrieval_metrics
+
+
+    #============================
+    #LLM
+    #============================
+    def extract_claims(self, llm_nlp):
+        claims = []
+        for sent in llm_nlp.sents:
+            claim_parts = []
+            for token in sent:
+                if token.pos_ in ["NOUN", "PROPN"] and token.dep_ in ["nsubj", "dobj", "pobj"]:
+                    claim_parts.append(token.text)
+                elif token.pos_ == "VERB":
+                    claim_parts.append(token.lemma_)
+        if len(claim_parts) >= 2:
+            claims.append(" ".join(claim_parts))
+        claims.extend([sent.text.strip() for sent in llm_nlp.sents if sent.text.strip()])
+        return list(set(claims))
+        
+    def analyze_llm_output(self, user_input, llm_output, retrieved_docs, llm_output_nlp, nli_classifier, embedding_model, fact_claims):
+        llm_metrics = {}
+        #NLI
+        retrieved_documents = retrieved_docs.to_dict('records')
+        premises = " ".join([doc["text"] for doc in retrieved_documents])
+        source_texts = [doc['text'] for doc in retrieved_documents if doc.get('text') and doc.get('text').strip()]
+        if not fact_claims or not source_texts:
+            llm_metrics["factuality_score"] = 0.0
+            llm_metrics["contradiction_score"] = 0.0
+            llm_metrics["coverage"] = 0.0
+        else:
+            nli_inputs = [[doc_text, claim] for claim in fact_claims for doc_text in source_texts]
+            try:
+                nli_result = nli_classifier(
+                    nli_inputs,
+                    candidate_labels=["entailment", "neutral", "contradiction"],
+                )
+                supported_claims_count = 0
+                entailment_scores = []
+                all_contradiction_scores = []
+                for i in range(len(fact_claims)):
+                    claim_results = nli_result[i * len(source_texts): (i + 1) * len(source_texts)]
+                    max_entailment_score = 0.0
+                    for result in claim_results:
+                        entailment_score = result["scores"][result['labels'].index('entailment')]
+                        contradiction_score = result['scores'][result['labels'].index('contradiction')]
+                        all_contradiction_scores.append(contradiction_score)
+                        if entailment_score > max_entailment_score:
+                            max_entailment_score = entailment_score
+                    if max_entailment_score > 0.5:
+                        supported_claims_count +=1
+                        entailment_scores.append(max_entailment_score)
+                #Abdeckung        
+                coverage = supported_claims_count / len(fact_claims)
+                #Faktizität
+                factuality_score = np.mean(entailment_scores) if entailment_scores else 0.0
+                #factuality_score = nli_result["scores"][nli_result["labels"].index("entailment")]
+                #Widerspruch
+                contradiction_score = np.mean(all_contradiction_scores) if all_contradiction_scores else 0.0
+                #contradiction_score= nli_result["scores"][nli_result["labels"].index("contradiction")]
+                llm_metrics["coverage"] = float(coverage)
+                llm_metrics["factuality_score"] = float(factuality_score)
+                llm_metrics["contradiction_score"] = float(contradiction_score)
+            except:
+                llm_metrics["coverage"] = 0.0
+                llm_metrics["factuality_score"] = 0.0
+                llm_metrics["contradiction_score"] = 0.0
+        #Attribution Mapping
+        try:
+            output_sentences = [sent.text for sent in llm_output_nlp.sents]
+        except:
+            output_sentences = [llm_output_nlp]
+        if not output_sentences or not premises:
+            llm_metrics["attribution_rate"] = 0.0
+        else:
+            #Embedding
+            doc_texts = [doc["text"] for doc in retrieved_documents]
+            doc_embeddings = embedding_model.encode(doc_texts, convert_to_tensor=True)
+            sentence_embeddings = embedding_model.encode(output_sentences, convert_to_tensor=True)
+            
+            attribution_count = 0
+            for sent_emb in sentence_embeddings:
+                #Cosine-Similarity
+                cosine_scores = util.cos_sim(sent_emb, doc_embeddings)
+                max_score = np.max(cosine_scores.cpu().numpy())
+                #Schwellenwert für Attribut-Zuordnung
+                if max_score > 0.65:
+                    attribution_count +=1
+            attribution_rate = attribution_count / len(output_sentences)
+            llm_metrics["attribution_rate"] = float(attribution_rate)
+        #Relevanz
+        if not user_input or not llm_output:
+            llm_metrics["relevance_score"] = 0.0
+        else:
+            sentences_to_embed = [user_input, llm_output]
+            rel_embeddings = embedding_model.encode(sentences_to_embed, convert_to_tensor=True)
+            rel_cosine_similarity = util.cos_sim(rel_embeddings[0], rel_embeddings[1])
+            relevance_score = rel_cosine_similarity.item()
+            llm_metrics["relevance_score"] = float(relevance_score)
+        return llm_metrics
+
+
+    def build_output(self) -> Data:
+        #Variablen
+        user_val = self.user_input_value
+        retrieval_val = self.retrieved_value
+        llm_val = self.llm_output_value
+        k = 10
+        similarity_threshold = 0.2
+        embedding_model = SentenceTransformer(r"I:\PATH\TO\all-MiniLM-L6-v2")
+        #Benchamrk-Datensatz
+        ground_truth_doc = pd.read_csv("I:/PATH/TO/hotpotqa.csv")
+        classifier = pipeline("zero-shot-classification", model=r"I:\PATH\TO\xnli")
+        #NLP Model laden
+        nlp = spacy.load("en_core_web_lg")
+        user_input_nlp = nlp(user_val)
+        llm_output_nlp = nlp(llm_val)
+        entities = [ent.text for ent in user_input_nlp.ents]
+        #Input Analyse
+        input_scores = self.analyze_chat_input(user_val,entities, classifier)
+        #Retrieval Analyse
+        retrieval_scores = self.analyze_retrieval(embedding_model, ground_truth_doc, user_val, retrieval_val, k, similarity_threshold)
+        #LLM Analyse
+        claims = self.extract_claims(llm_output_nlp)
+        llm_scores = self.analyze_llm_output(user_val, llm_val, retrieval_val, llm_output_nlp, classifier, embedding_model, claims)
+        #Berechnung des Index
+        i_s = (input_scores["ner_score"] + input_scores["intent_score"] + input_scores["intent_confidence_sore"]) / 3
+        r_s = (retrieval_scores["recall_at_k_score"] + retrieval_scores["precision_at_k_score"] + retrieval_scores["mrr_score"] + retrieval_scores["ndcg_score"]) / 4
+        llm_s = (llm_scores["factuality_score"] + llm_scores["contradiction_score"] + llm_scores["relevance_score"] + llm_scores["attribution_rate"] + llm_scores["coverage"]) / 5
+
+        #Bewertungsindex mit Gewichtung
+        index = (0.15 * i_s) + (0.45 * r_s) + (0.40 * llm_s)
+
+        data = Data(user_input=user_val,llm_output=llm_val, input_scores=input_scores, input_score=i_s, retrieval_scores=retrieval_scores, retrieval_score=r_s, llm_scores=llm_scores, llm_score=llm_s, validation_index=index)
+        self.status = data
+        return data
