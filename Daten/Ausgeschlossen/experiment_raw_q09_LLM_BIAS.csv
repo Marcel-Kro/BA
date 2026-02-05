@@ -1,0 +1,55 @@
+run_id,run_question,run_answer,run_prediction,input_ner,input_intent,input_confidence,retrieval_recall_at_k,retrieval_precision_at_k,retrieval_mrr,retrieval_ndcg,llm_factuality,llm_contradiction,llm_relevance,llm_attribution_rate,llm_coverage,input_score,retrieval_score,llm_score,index,rouge_N,rouge_L,bleu
+1,Do The Importance of Being Icelandic and The Five Obstructions belong to different film genres ?,no,"Yes, ""The Importance of Being Icelandic"" and ""The Five Obstructions"" belong to different film genres.
+
+* ""The Importance of Being Icelandic"" is a documentary film, as it traces the steps of three Icelandic Canadians on their quest for their ancestral heritage in Iceland and Canada.
+* ""The Five Obstructions"", on the other hand, is also a documentary film, but one that incorporates experimental films and challenges its director, Jørgen Leth, to remake his own short film five times with different ""obstructions"" imposed by Lars von Trier.",0.0,0.7807891666889191,0.9123156666755676,0.9473684210526315,1.0,1.0,0.9999999464736815,0.5890058875083923,0.42592344582080843,0.8263998627662659,0.6666666666666666,1.0,0.5643682777881622,0.9868420918815782,0.7015991725524267,0.8093738520359053,0.0,0.0,0
+2,Do The Importance of Being Icelandic and The Five Obstructions belong to different film genres ?,no,"Yes, ""The Importance of Being Icelandic"" and ""The Five Obstructions"" belong to different film genres.
+
+* ""The Importance of Being Icelandic"" is a documentary film, as it traces the steps of three Icelandic Canadians on their quest for their ancestral heritage in Iceland and Canada.
+* ""The Five Obstructions"", on the other hand, is also a documentary film, but one that incorporates experimental films and challenges its director, Jørgen Leth, to remake his own short film five times with different ""obstructions"" imposed by Lars von Trier.",0.0,0.7807891666889191,0.9123156666755676,0.9473684210526315,1.0,1.0,0.9999999464736815,0.5890058875083923,0.42592344582080843,0.8263998627662659,0.6666666666666666,1.0,0.5643682777881622,0.9868420918815782,0.7015991725524267,0.8093738520359053,0.0,0.0,0
+3,Do The Importance of Being Icelandic and The Five Obstructions belong to different film genres ?,no,"Yes, ""Do The Importance of Being Icelandic"" and ""The Five Obstructions"" belong to different film genres.
+
+* ""The Importance of Being Icelandic"" is a documentary film, as it follows three Icelandic Canadians on their journey to discover their Icelandic heritage.
+* ""The Five Obstructions"", on the other hand, is also a documentary film, but with experimental elements. It is a remake challenge where Lars von Trier gives his friend Jørgen Leth the task of remaking his short film ""The Perfect Human"" five times with different obstacles imposed by von Trier.
+
+Both films are documentaries, but they have distinct styles and approaches to storytelling, making them part of different sub-genres within the documentary category.",0.0,0.7807891666889191,0.9123156666755676,0.9473684210526315,1.0,1.0,0.9999999464736815,0.5890058875083923,0.42592344582080843,0.8332437872886658,0.6,1.0,0.5643682777881622,0.9868420918815782,0.6896346241235733,0.804588032664364,0.0,0.0,0
+4,Do The Importance of Being Icelandic and The Five Obstructions belong to different film genres ?,no,"Yes, ""The Importance of Being Icelandic"" and ""The Five Obstructions"" belong to different film genres.
+
+* ""The Importance of Being Icelandic"" is a documentary film, which means it is a non-fictional film that documents reality or explores a particular subject or theme.
+* ""The Five Obstructions"", on the other hand, is also a documentary film, but it incorporates experimental films and challenges its director to remake another filmmaker's work with different obstacles. This makes it a hybrid of documentary and experimental filmmaking.
+
+However, both films share some common characteristics as documentaries, such as exploring themes, interviewing subjects, and presenting real-life situations or experiences.",0.0,0.7807891666889191,0.9123156666755676,0.9473684210526315,1.0,1.0,0.9999999464736815,0.5890058875083923,0.42592344582080843,0.8436374664306641,0.4,1.0,0.5643682777881622,0.9868420918815782,0.6517133599519729,0.7894195269957238,0.0,0.0,0
+5,Do The Importance of Being Icelandic and The Five Obstructions belong to different film genres ?,no,"Yes, ""The Importance of Being Icelandic"" and ""The Five Obstructions"" belong to different film genres.
+
+* ""The Importance of Being Icelandic"" is a documentary film, as it traces the steps of three Icelandic Canadians on a quest to discover their Icelandic heritage by going to Iceland.
+* ""The Five Obstructions"", on the other hand, is also a documentary film, but it incorporates experimental films and challenges its director Jørgen Leth to remake his own short film five times with different obstructions imposed by Lars von Trier.",0.0,0.7807891666889191,0.9123156666755676,0.9473684210526315,1.0,1.0,0.9999999464736815,0.5890058875083923,0.42592344582080843,0.831378698348999,0.6666666666666666,1.0,0.5643682777881622,0.9868420918815782,0.7025949396689732,0.809772158882524,0.0,0.0,0
+6,Do The Importance of Being Icelandic and The Five Obstructions belong to different film genres ?,no,"Yes, ""The Importance of Being Icelandic"" and ""The Five Obstructions"" belong to different film genres.
+
+* ""The Importance of Being Icelandic"" is a documentary film, as it follows three Icelandic Canadians on their quest to discover their Icelandic heritage by traveling to Iceland and participating in the Islendingadagurinn celebration.
+* ""The Five Obstructions"", on the other hand, is a documentary that incorporates experimental films. It's a unique blend of documentary and art-house film, where Lars von Trier challenges his friend and mentor Jørgen Leth to remake his 1967 film ""The Perfect Human"" five times with different obstructions.
+
+So, while both films are non-fictional and share some similarities in terms of their focus on filmmaking and cultural heritage, they belong to distinct genres.",0.0,0.7807891666889191,0.9123156666755676,0.9473684210526315,1.0,1.0,0.9999999464736815,0.5890058875083923,0.42592344582080843,0.8431085348129272,0.6,1.0,0.5643682777881622,0.9868420918815782,0.6916075736284256,0.8053772124663048,0.0,0.0,0
+7,Do The Importance of Being Icelandic and The Five Obstructions belong to different film genres ?,no,"Yes, ""The Importance of Being Icelandic"" and ""The Five Obstructions"" belong to different film genres.
+
+""The Importance of Being Icelandic"" is a documentary film, as it is based on real events and people, and it aims to document their experiences and perspectives.
+
+On the other hand, ""The Five Obstructions"" is also a documentary film, but it incorporates experimental films produced by the filmmakers. However, its core concept revolves around Jørgen Leth remaking his own short film ""The Perfect Human"" five times with different ""obstructions"", which makes it more of an essay or an experiment in filmmaking than a traditional documentary.
+
+Both films are classified as documentaries because they focus on real people and events, but the second one has a more experimental and artistic approach.",0.0,0.7807891666889191,0.9123156666755676,0.9473684210526315,1.0,1.0,0.9999999464736815,0.5890058875083923,0.42592344582080843,0.8326432108879089,0.6,1.0,0.5643682777881622,0.9868420918815782,0.6895145088434219,0.8045399865523033,0.0,0.0,0
+8,Do The Importance of Being Icelandic and The Five Obstructions belong to different film genres ?,no,"Yes, ""The Importance of Being Icelandic"" and ""The Five Obstructions"" belong to different film genres.
+
+* ""The Importance of Being Icelandic"" is a documentary film, as it documents the journey of three Icelandic Canadians as they discover their ancestral heritage in Iceland.
+* ""The Five Obstructions"", on the other hand, is an experimental documentary film that incorporates elements of fiction and is more concerned with the creative process than traditional documentary filmmaking.
+
+So, while both films are documentaries, they differ significantly in style and approach.",0.0,0.7807891666889191,0.9123156666755676,0.9473684210526315,1.0,1.0,0.9999999464736815,0.5890058875083923,0.42592344582080843,0.8394935131072998,0.5,1.0,0.5643682777881622,0.9868420918815782,0.6708845692873001,0.7970880107298546,0.0,0.0,0
+9,Do The Importance of Being Icelandic and The Five Obstructions belong to different film genres ?,no,"Yes, ""The Importance of Being Icelandic"" and ""The Five Obstructions"" belong to different film genres.
+
+* ""The Importance of Being Icelandic"" is a documentary film, as it follows three Icelandic Canadians on their quest to discover their Icelandic heritage and explores the contrasts between Canadian culture and Icelandic culture.
+* ""The Five Obstructions"", on the other hand, is an experimental documentary film that incorporates elements of fiction and challenges the traditional concept of filmmaking. It is a remake of another film, ""The Perfect Human"", with each iteration having a different ""obstruction"" imposed by Lars von Trier.
+
+Therefore, while both films are documentaries, they belong to different sub-genres within the documentary category.",0.0,0.7807891666889191,0.9123156666755676,0.9473684210526315,1.0,1.0,0.9999999464736815,0.5890058875083923,0.42592344582080843,0.8456194996833801,0.6,1.0,0.5643682777881622,0.9868420918815782,0.6921097666025162,0.805578089655941,0.0,0.0,0
+10,Do The Importance of Being Icelandic and The Five Obstructions belong to different film genres ?,no,"Yes, ""The Importance of Being Icelandic"" and ""The Five Obstructions"" belong to different film genres.
+
+""The Importance of Being Icelandic"" is a documentary film, as it documents the journey of three Icelandic Canadians as they discover their ancestral heritage in Iceland.
+
+On the other hand, ""The Five Obstructions"" is also a documentary film, but one that incorporates experimental films and challenges its subject, Jørgen Leth, to remake his own short film five times with different ""obstructions"".",0.0,0.7807891666889191,0.9123156666755676,0.9473684210526315,1.0,1.0,0.9999999464736815,0.5890058875083923,0.42592344582080843,0.8156055808067322,0.6666666666666666,1.0,0.5643682777881622,0.9868420918815782,0.6994403161605198,0.8085103094791426,0.0,0.0,0
