@@ -1,0 +1,43 @@
+run_id,run_question,run_answer,run_prediction,input_ner,input_intent,input_confidence,retrieval_recall_at_k,retrieval_precision_at_k,retrieval_mrr,retrieval_ndcg,llm_factuality,llm_contradiction,llm_relevance,llm_attribution_rate,llm_coverage,input_score,retrieval_score,llm_score,index,rouge_N,rouge_L,bleu,llm_as_a_judge-score
+1,Where is the Cocoa Krispies and former Superman sponsor located?,"Battle Creek, Michigan","The answer to your question is:
+
+Kellogg's, the manufacturer of Cocoa Krispies and former sponsor of Superman, is located in Battle Creek, Michigan, USA.
+
+However, if you are asking about General Mills, which sponsors Lucky Charms and other cereals, it is headquartered in Golden Valley, Minnesota, USA.",1.0,0.9821324646472932,0.9928529858589172,0.6121673003802282,0.67,0.29,0.9999999879935816,0.7338310480117798,0.3571154952049255,0.7963705062866211,0.5,1.0,0.9916618168354034,0.6430418220934524,0.6774634099006652,0.7091034564276302,0.1176470588235294,0.1176470588235294,0.0304149532336236,0.9389999999999998
+2,Where is the Cocoa Krispies and former Superman sponsor located?,"Battle Creek, Michigan","The answer to your question is:
+
+Kellogg's, the manufacturer of Cocoa Krispies and former sponsor of Superman, is located in Battle Creek, Michigan, USA.
+
+However, if you are asking about General Mills, which sponsors Lucky Charms and other cereals, it is headquartered in Golden Valley, Minnesota, USA.",1.0,0.9821324646472932,0.9928529858589172,0.6121673003802282,0.67,0.29,0.9999999879935816,0.7338310480117798,0.3571154952049255,0.7963705062866211,0.5,1.0,0.9916618168354034,0.6430418220934524,0.6774634099006652,0.7091034564276302,0.1176470588235294,0.1176470588235294,0.0304149532336236,0.938
+3,Where is the Cocoa Krispies and former Superman sponsor located?,"Battle Creek, Michigan","The answer to your question is:
+
+Kellogg's is the manufacturer that produces Cocoa Krispies and was also a former sponsor of Superman.
+
+Note: General Mills, Inc. is mentioned as another cereal manufacturer in the text, but it does not produce Cocoa Krispies or have any association with Superman.",1.0,0.9821324646472932,0.9928529858589172,0.6121673003802282,0.67,0.29,0.9999999879935816,0.7338310480117798,0.3571154952049255,0.7598691582679749,0.0,1.0,0.9916618168354034,0.6430418220934524,0.570163140296936,0.6661833485861386,0.0,0.0,0.0,0.435
+4,Where is the Cocoa Krispies and former Superman sponsor located?,"Battle Creek, Michigan","The correct answer to your question is:
+
+Kellogg's, the manufacturer of Cocoa Krispies cereal, is located in Battle Creek, Michigan, United States.
+
+Additionally, Kellogg's was also the sponsor of the Adventures of Superman television series.",1.0,0.9821324646472932,0.9928529858589172,0.6121673003802282,0.67,0.29,0.9999999879935816,0.7338310480117798,0.3571154952049255,0.7896712422370911,0.5,1.0,0.9916618168354034,0.6430418220934524,0.6761235570907592,0.7085675153036678,0.15,0.15,0.0409960030845393,0.9249999999999998
+5,Where is the Cocoa Krispies and former Superman sponsor located?,"Battle Creek, Michigan","The locations mentioned in the text are:
+
+* Kellogg's: Battle Creek, Michigan, United States
+* General Mills, Inc.: Golden Valley, Minnesota, United States (a suburb of Minneapolis)
+* Mondelez International, Inc.: Illinois, United States
+* PepsiCo, Inc.: Purchase, New York, United States
+* Henkel AG & Company, KGaA: Düsseldorf, Germany
+* Carrefour S.A.: Boulogne Billancourt, France
+
+There is no mention of the location where Cocoa Krispies were sponsored by Kellogg's in relation to Superman.",1.0,0.9821324646472932,0.9928529858589172,0.6121673003802282,0.67,0.29,0.9999999879935816,0.7338310480117798,0.3571154952049255,0.8435365557670593,0.0,1.0,0.9916618168354034,0.6430418220934524,0.5868966197967529,0.6728767403860653,0.081081081081081,0.081081081081081,0.0192414460721011,0.586
+6,Where is the Cocoa Krispies and former Superman sponsor located?,"Battle Creek, Michigan","The sponsor of Cocoa Krispies (now known as Cocoa Pops) is Kellogg's, which is headquartered in Battle Creek, Michigan, USA.
+
+Note: I've also checked that General Mills, Inc. is not associated with Cocoa Krispies, and the text doesn't provide information about a Superman sponsorship being related to a specific cereal or company.",1.0,0.9821324646472932,0.9928529858589172,0.6121673003802282,0.67,0.29,0.9999999879935816,0.7338310480117798,0.3571154952049255,0.829020082950592,0.0,1.0,0.9916618168354034,0.6430418220934524,0.5839933252334595,0.6717154225607479,0.1034482758620689,0.1034482758620689,0.0274617518190544,0.808
+7,Where is the Cocoa Krispies and former Superman sponsor located?,"Battle Creek, Michigan","Kellogg's is the manufacturer of Cocoa Krispies and former Superman sponsor. Kellogg's is headquartered in Battle Creek, Michigan, United States.",1.0,0.9821324646472932,0.9928529858589172,0.6121673003802282,0.67,0.29,0.9999999879935816,0.7338310480117798,0.3571154952049255,0.7375536561012268,1.0,1.0,0.9916618168354034,0.6430418220934524,0.7657000398635864,0.7443981084127986,0.24,0.24,0.0725476250110011,0.944
+8,Where is the Cocoa Krispies and former Superman sponsor located?,"Battle Creek, Michigan","Cocoa Krispies (and former Superman sponsor) is produced by Kellogg's, which is headquartered in Battle Creek, Michigan, United States.",1.0,0.9821324646472932,0.9928529858589172,0.6121673003802282,0.67,0.29,0.9999999879935816,0.7338310480117798,0.3571154952049255,0.8271164894104004,0.0,1.0,0.9916618168354034,0.6430418220934524,0.5836126065254211,0.6715631350775326,0.2608695652173913,0.2608695652173913,0.0764719112901872,0.9089999999999998
+9,Where is the Cocoa Krispies and former Superman sponsor located?,"Battle Creek, Michigan","The sponsors mentioned are:
+
+* Kellogg's (Cocoa Krispies)
+* General Mills, Inc. (no specific product mentioned)
+
+Note that Adventures of Superman was sponsored by Kellogg's, but there is no mention of which specific cereal they were promoting.",1.0,0.9821324646472932,0.9928529858589172,0.6121673003802282,0.67,0.29,0.9999999879935816,0.7338310480117798,0.3571154952049255,0.7228534817695618,0.0,1.0,0.9916618168354034,0.6430418220934524,0.5627600049972534,0.6632220944662655,0.0,0.0,0.0,0.362
+10,Where is the Cocoa Krispies and former Superman sponsor located?,"Battle Creek, Michigan","The Cocoa Krispies and former Superman sponsor located is Kellogg's, which is headquartered in Battle Creek, Michigan, United States.",1.0,0.9821324646472932,0.9928529858589172,0.6121673003802282,0.67,0.29,0.9999999879935816,0.7338310480117798,0.3571154952049255,0.859948456287384,0.0,1.0,0.9916618168354034,0.6430418220934524,0.5901789999008178,0.6741896924276912,0.2608695652173913,0.2608695652173913,0.0764719112901872,0.93

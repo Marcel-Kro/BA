@@ -1,0 +1,34 @@
+run_id,run_question,run_answer,run_prediction,input_ner,input_intent,input_confidence,retrieval_recall_at_k,retrieval_precision_at_k,retrieval_mrr,retrieval_ndcg,llm_factuality,llm_contradiction,llm_relevance,llm_attribution_rate,llm_coverage,input_score,retrieval_score,llm_score,index,rouge_N,rouge_L,bleu,llm_as_a_judge-score
+1,Is Ferdi Taygan older or Mahesh Bhupathi?,Ferdi Taygan,"Ferdi Taygan is older than Mahesh Bhupathi. Ferdi Taygan was born in 1942 and Mahesh Bhupathi was born on June 7, 1974.",1.0,0.8425544798374176,0.937021791934967,0.6752411575562701,0.7,0.3,0.9999999232307611,0.5871367454528809,0.367629262804985,0.8881310820579529,0.0,1.0,0.9265254239241282,0.6688102701967579,0.5685794180631637,0.6673752024024258,0.1666666666666666,0.1666666666666666,0.0657951694959769,0.907
+2,Is Ferdi Taygan older or Mahesh Bhupathi?,Ferdi Taygan,"Ferdi Taygan is older than Mahesh Bhupathi. Ferdi Taygan was born in 1942 and Mahesh Bhupathi was born on June 7, 1974.",1.0,0.8425544798374176,0.937021791934967,0.6752411575562701,0.7,0.3,0.9999999232307611,0.5871367454528809,0.367629262804985,0.8881310820579529,0.0,1.0,0.9265254239241282,0.6688102701967579,0.5685794180631637,0.6673752024024258,0.1666666666666666,0.1666666666666666,0.0657951694959769,0.905
+3,Is Ferdi Taygan older or Mahesh Bhupathi?,Ferdi Taygan,"According to the information provided, I can answer your question:
+
+Ferdi Taygan is not mentioned in the text, and there is no comparison between Ferdi Taygan and Mahesh Bhupathi. Therefore, I don't have enough information to determine which one is older.",1.0,0.8425544798374176,0.937021791934967,0.6752411575562701,0.7,0.3,0.9999999232307611,0.5871367454528809,0.367629262804985,0.8701174259185791,0.0,1.0,0.9265254239241282,0.6688102701967579,0.564976686835289,0.6659341099112759,0.0909090909090909,0.0909090909090909,0.0349215147884789,0.107
+4,Is Ferdi Taygan older or Mahesh Bhupathi?,Ferdi Taygan,"Based on the text, I can answer that Mahesh Bhupathi (born June 7, 1974) is older than Zaheer Khan (born October 7, 1978).",1.0,0.8425544798374176,0.937021791934967,0.6752411575562701,0.7,0.3,0.9999999232307611,0.5871367454528809,0.367629262804985,0.6467203497886658,0.0,1.0,0.9265254239241282,0.6688102701967579,0.5202972716093063,0.6480623438208828,0.0,0.0,0.0,0.066
+5,Is Ferdi Taygan older or Mahesh Bhupathi?,Ferdi Taygan,"I can answer your question.
+
+According to the text, Mahesh Bhupathi (born June 7, 1974) and Zaheer Khan (born October 7, 1978) are both younger than Ferdi Taygan, who is not mentioned in the provided text. Therefore, I assume that Ferdi Taygan is older than both of them.
+
+Please note that Ferdi Taygan is not a person mentioned in the given text, and my answer is based on the information about Mahesh Bhupathi and Zaheer Khan's birth dates.",1.0,0.8425544798374176,0.937021791934967,0.6752411575562701,0.7,0.3,0.9999999232307611,0.5871367454528809,0.367629262804985,0.8275812268257141,0.0,1.0,0.9265254239241282,0.6688102701967579,0.556469447016716,0.6625312139838466,0.0493827160493827,0.0493827160493827,0.0182482967150452,0.72
+6,Is Ferdi Taygan older or Mahesh Bhupathi?,Ferdi Taygan,"Based on the provided text, I can answer that Ferdi Taygan is not mentioned in this text, but Mahesh Bhupathi and Zaheer Khan are. Therefore, it is impossible for me to determine who is older between Ferdi Taygan and these two individuals since Ferdi Taygan is not present in the context.
+
+However, if you're asking about comparing the ages of Mahesh Bhupathi and Zaheer Khan based on their birth dates:
+
+Mahesh Shrinivas Bhupathi (born 7 June 1974)
+Zaheer Khan (born 7 October 1978)
+
+Given these birthdates, Mahesh Bhupathi is older than Zaheer Khan.",1.0,0.8425544798374176,0.937021791934967,0.6752411575562701,0.7,0.3,0.9999999232307611,0.5871367454528809,0.367629262804985,0.8265119194984436,0.0,1.0,0.9265254239241282,0.6688102701967579,0.5562555855512619,0.662445669397665,0.0416666666666666,0.0416666666666666,0.0152890186309189,0.1609999999999999
+7,Is Ferdi Taygan older or Mahesh Bhupathi?,Ferdi Taygan,"Ferdi Taygan is not mentioned in the text provided, and there is no information about his age or birthdate compared to Mahesh Bhupathi. Therefore, I don't know who Ferdi Taygan is or his relation to Mahesh Bhupathi.",1.0,0.8425544798374176,0.937021791934967,0.6752411575562701,0.7,0.3,0.9999999232307611,0.5871367454528809,0.367629262804985,0.8362457156181335,0.0,1.0,0.9265254239241282,0.6688102701967579,0.5582023447751998,0.6632243730872402,0.1,0.1,0.0387492129146064,0.1129999999999999
+8,Is Ferdi Taygan older or Mahesh Bhupathi?,Ferdi Taygan,"I can answer your question.
+
+According to the provided text, Mahesh Bhupathi (born 7 June 1974) is a retired Indian professional tennis player. I don't see any information about Ferdi Taygan in this text.
+
+So, based on the given information, it appears that Mahesh Bhupathi is younger than Ferdi Taygan, since there's no mention of Ferdi Taygan at all.",1.0,0.8425544798374176,0.937021791934967,0.6752411575562701,0.7,0.3,0.9999999232307611,0.5871367454528809,0.367629262804985,0.8521311283111572,0.25,1.0,0.9265254239241282,0.6688102701967579,0.6113794273138046,0.6844952061026821,0.0634920634920634,0.0634920634920634,0.0241754738514861,0.71
+9,Is Ferdi Taygan older or Mahesh Bhupathi?,Ferdi Taygan,"I can answer your question based on the text.
+
+Ferdi Taygan is not mentioned in the text, but Mahesh Bhupathi's birthdate (7 June 1974) and Zaheer Khan's birthdate (7 October 1978) are both mentioned. Therefore, I don't know who Ferdi Taygan is or his age relative to Mahesh Bhupathi.
+
+However, I can tell you that Mahesh Bhupathi was born in 1974 and Zaheer Khan was born in 1978. This means that Zaheer Khan (born 1978) is older than Ferdi Taygan if we assume that Ferdi Taygan is indeed the person being referred to here, but only by a few years.
+
+If you can provide more information about Ferdi Taygan or clarify who he is, I may be able to give a more accurate answer.",1.0,0.8425544798374176,0.937021791934967,0.6752411575562701,0.7,0.3,0.9999999232307611,0.5871367454528809,0.367629262804985,0.8355781435966492,0.0,1.0,0.9265254239241282,0.6688102701967579,0.5580688303709029,0.6631709673255215,0.0310077519379844,0.0310077519379844,0.0114512158114979,0.202
+10,Is Ferdi Taygan older or Mahesh Bhupathi?,Ferdi Taygan,"Ferdi Taygan was born in 1947, but I don't know his exact date of birth. However, based on the information provided, Mahesh Bhupathi was born on June 7, 1974, which makes him younger than Ferdi Taygan.",1.0,0.8425544798374176,0.937021791934967,0.6752411575562701,0.7,0.3,0.9999999232307611,0.5871367454528809,0.367629262804985,0.7955514192581177,0.0,1.0,0.9265254239241282,0.6688102701967579,0.5500634855031967,0.6599688293784389,0.1025641025641025,0.1025641025641025,0.0398409536444797,0.8470000000000001
